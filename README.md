@@ -1,6 +1,18 @@
 # Install kubernetes master-slave on ubuntu 16.04 or 18.04
 
-## after install master, you must run 
+## first, you must run this script on root. 
+
+### On master node, you can run 
+```
+sh master-setup.sh
+```
+
+### On slave node, you can run 
+```
+sh slave-setup.sh
+```
+
+### after install master, you must run 
 ```
 $ kubectl -n kube-system edit service kubernetes-dashboard
 ```
