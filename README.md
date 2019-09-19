@@ -1,6 +1,10 @@
 # Install kubernetes master-slave on ubuntu 16.04 or 18.04
 
-## first, you must run this script on root. 
+## Before install on master, you can change IP apiserver-advertise-address on master-setup.sh
+```
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.7
+```
+## First, you must run this script on root. 
 
 ### On master node, you can run 
 ```
