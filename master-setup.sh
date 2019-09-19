@@ -15,9 +15,8 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/phenom1711/kubernetes/master/kubernetes-dashboard.yaml
 echo '  type: NodePort' >> kubernetes-dashboard.yaml
-kubectl create -f kubernetes-dashboard.yaml
 
 sudo bash -c 'cat << EOF > admin-user.yaml
 apiVersion: v1
