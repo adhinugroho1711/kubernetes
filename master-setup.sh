@@ -7,7 +7,7 @@ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 apt-get update && sudo apt-get install kubelet kubeadm kubectl -y
 sudo kubeadm config images pull
-kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.7
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.64.7
 
 sleep 30
 
