@@ -14,7 +14,7 @@ sleep 30
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl apply -f https://raw.githubusercontent.com/phenom1711/kubernetes/master/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubectl apply -f https://raw.githubusercontent.com/phenom1711/kubernetes/master/kubernetes-dashboard.yaml
 echo '  type: NodePort' >> kubernetes-dashboard.yaml
 
