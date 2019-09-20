@@ -34,6 +34,12 @@ NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        
 kubernetes-dashboard   NodePort   10.152.183.101   <none>        443:32068/TCP   12m
 ```
 ### allow dashboard port
+#### using iptables
 ```
 $ sudo iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 32068 -j ACCEPT
+```
+
+#### using ufw
+```
+$ ufw allow 32068
 ```
