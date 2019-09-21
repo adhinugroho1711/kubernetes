@@ -43,3 +43,9 @@ $ sudo iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 32068 -j ACC
 ```
 $ ufw allow 32068
 ```
+
+### How to access dashboard
+```
+https://<ip_node>:32068
+```
+
