@@ -71,3 +71,9 @@ kubectl -n kube-system get service kubernetes-dashboard
  
 # This command will print a token that can be used to authenticate in the Kubernetes dashboard
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') | grep "token:"
+
+# install helm
+snap install helm --classic
+kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --history-max=200 --service-account tiller --upgrade
