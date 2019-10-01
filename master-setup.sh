@@ -77,3 +77,4 @@ snap install helm --classic
 kubectl -n kube-system create serviceaccount tiller
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
 helm init --history-max=200 --service-account tiller --upgrade
+helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
