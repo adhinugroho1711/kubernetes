@@ -1,4 +1,5 @@
 #!/bin/sh
+source config.properties
 swapoff -a
 apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -24,4 +25,4 @@ systemctl restart docker
 
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-apt-get update && sudo apt-get install -qy kubelet=1.15.4-00 kubeadm=1.15.4-00 kubectl=1.15.4-00 -y
+apt-get update && sudo apt-get install -qy kubelet=$kubelet_version kubeadm=$kubeadm_version kubectl=$kubectl_version -y
