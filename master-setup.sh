@@ -2,7 +2,7 @@
 source ./config.properties
 
 export 'whoami'
-echo $(getProperty "ip_server")
+echo $ip_server
 echo "[INFO]: Install Docker and Component...."
 swapoff -a
 apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common -y
