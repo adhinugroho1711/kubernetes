@@ -1,5 +1,5 @@
 #!/bin/sh
-file="./config.properties"
+file="config.properties"
 
 function getProperty {
        PROP_KEY=$1
