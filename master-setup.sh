@@ -1,8 +1,9 @@
 #!/bin/sh
-source config.properties
+file="./config.properties"
 
 export 'whoami'
 
+echo "[INFO]: Install Docker and Component...."
 swapoff -a
 apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -26,6 +27,7 @@ mkdir -p /etc/systemd/system/docker.service.d
 systemctl daemon-reload
 systemctl restart docker
 
+echo "[INFO]: Install Kubernetes and Component...."
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 apt-get update && sudo apt-get install -qy kubelet=$kubelet_version kubeadm=$kubeadm_version kubectl=$kubectl_version -y
@@ -37,7 +39,9 @@ sleep 30
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+echo "[INFO]: Install Flannel and Component...."
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+echo "[INFO]: Install Dashboard and Component...."
 kubectl apply -f https://raw.githubusercontent.com/phenom1711/kubernetes/master/kubernetes-dashboard.yaml
 echo '  type: NodePort' >> kubernetes-dashboard.yaml
 
@@ -48,7 +52,8 @@ metadata:
   name: admin-user
   namespace: kube-system
 EOF'
- 
+
+echo "[INFO]: Install Admin and Component...."
 kubectl create -f admin-user.yaml
  
 # Create an admin role that will be needed in order to access the Kubernetes Dashboard
@@ -76,12 +81,14 @@ kubectl -n kube-system get service kubernetes-dashboard
 # This command will print a token that can be used to authenticate in the Kubernetes dashboard
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') | grep "token:"
 
+echo "[INFO]: Install Helm and Component...."
 # install helm
 snap install helm --classic
 kubectl -n kube-system create serviceaccount tiller
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
 helm init --history-max=200 --service-account tiller --upgrade
 
+echo "[INFO]: Adding Repository Helm...."
 # add helm repo
 helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 helm repo add bitnami https://charts.bitnami.com/bitnami
