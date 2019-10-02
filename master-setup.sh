@@ -2,11 +2,11 @@
 file="config.properties"
 
 function getProperty {
-       PROP_KEY=$1
-       PROP_VALUE=`cat $file | grep "$PROP_KEY" | cut -d'=' -f2`
-       echo $PROP_VALUE
-    }
-    
+   PROP_KEY=$1
+   PROP_VALUE=`cat $file | grep "$PROP_KEY" | cut -d'=' -f2`
+   echo $PROP_VALUE
+}
+
 export 'whoami'
 echo $(getProperty "ip_server")
 echo "[INFO]: Install Docker and Component...."
