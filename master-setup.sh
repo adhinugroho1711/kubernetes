@@ -1,11 +1,5 @@
-#!/bin/sh
-file="config.properties"
-
-function getProperty {
-   PROP_KEY=$1
-   PROP_VALUE=`cat $file | grep "$PROP_KEY" | cut -d'=' -f2`
-   echo $PROP_VALUE
-}
+#!/bin/bash
+source ./config.properties
 
 export 'whoami'
 echo $(getProperty "ip_server")
@@ -36,9 +30,9 @@ systemctl restart docker
 echo "[INFO]: Install Kubernetes and Component...."
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-apt-get update && sudo apt-get install -qy kubelet=$(getProperty "kubelet_version") kubeadm=$(getProperty "kubeadm_version") kubectl=$(getProperty "kubectl_version") -y
+apt-get update && sudo apt-get install -qy kubelet=$kubelet_version kubeadm=$kubeadm_version kubectl=$kubectl_version -y
 sudo kubeadm config images pull
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=$(getProperty "ip_server")
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=$ip_server
 
 sleep 30
 
