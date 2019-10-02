@@ -1,5 +1,8 @@
 #!/bin/sh
 source config.properties
+
+export 'whoami'
+
 swapoff -a
 apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
